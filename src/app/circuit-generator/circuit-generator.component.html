@@ -1,0 +1,37 @@
+<div class="dialog-container cr-flex-center">
+  <div class="editor-dialog">
+    <div class="header">
+      <div class="label">回路図を作成</div>
+      <!--<div class="close-button cr-flex-center">×</div>-->
+    </div>
+    <div class="body">
+
+      <div class="canvas-column">
+        <canvas id="canvas" class="canvas" height="500px" width="500px" style="border: 1px solid #ccc"></canvas>
+      </div>
+      <div class="tools-column">
+
+        <div class="label">ツール</div>
+        <div class="row">
+          <div class="button cr-flex-center" [class.disabled]="lineEditModeEnabled" (click)="triggerLineEditMode()">線を引く</div>
+          <div class="button cr-flex-center" [class.disabled]="!lineEditModeEnabled" (click)="triggerLineEditMode()">選択モード</div>
+          <div class="button cr-flex-center" [class.disabled]="!enableDeleteButton" (click)="removeSelectedElement()">削除</div>
+        </div>
+
+        <div class="label">部品</div>
+        <div class="row">
+          <div class="add-button cr-flex-center" (click)="addLED()">
+            <img class="img led" src="/assets/led.png">
+            <div class="label">LEDを追加</div>
+          </div>
+          <div class="add-button cr-flex-center" (click)="addIchigoJam()">
+            <img class="img ichigo-jam" src="/assets/jam.png">
+            <div class="label">IchigoJamを追加</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button save cr-flex-center" (click)="save()">作成</div>
+
+  </div>
+</div>

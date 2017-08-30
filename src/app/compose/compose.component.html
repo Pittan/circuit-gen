@@ -1,0 +1,71 @@
+
+<div class="main-content">
+
+  <div class="main-title">新しいレシピを作成する</div>
+  <form class="" action="index.html" method="post">
+
+    <div class="contents">
+      <div class="elements-container">
+
+        <div class="input-label">タイトル</div>
+        <div class="input-container">
+          <input type="text" name="title" [value]="title" [(ngModel)]="title" class="title text-input">
+        </div>
+
+
+        <div class="input-label">準備するもの</div>
+        <div class="input-container elements" *ngFor="let element of elements; trackBy: customTrackBy; let i = index;" >
+          <input [value]="elements[i]" [(ngModel)]="elements[i]" type="text" name="element=-{{i}}" class="text-input">
+        </div>
+        <div class="add-button-container">
+          <div class="add-button cr-flex-center" (click)="addElement()">
+            <div class="plus">+</div>
+            <div class="label"></div>追加
+          </div>
+        </div>
+      </div>
+      <div class="circuit-container">
+        <div class="input-label">配線図</div>
+        <div class="circuit-diagram" [style.background-image]="'url(' + image + ')'"></div>
+        <div class="button cr-flex-center" (click)="open()">配線図を作成する</div>
+      </div>
+    </div>
+
+    <div class="input-label">準備</div>
+    <div class="method-list">
+      <div class="method-container" *ngFor="let method of methods; trackBy: customTrackBy; let i = index;">
+        <div class="title">説明</div>
+
+        <li><input type="text" name="method-sub-{{i}}" [value]="methods[i].image.subTitle" [(ngModel)]="methods[i].image.subTitle" class="subtitle" placeholder="サブタイトル">
+          <!-- 画像挿入 か コード -->
+          <input type="file" (change)="onImageSelect($event.target.files[0], i)" class="image">
+          <div class="thumbnail" [style.background-image]="'url(' + methods[i].image.data + ')'"></div>
+
+          <div class="input-container">
+            <textarea name="method-code-{{i}}" rows="8" cols="60" class="text-input area" placeholder="ソースコード" [value]="methods[i].code" [(ngModel)]="methods[i].code"></textarea>
+          </div>
+          <div class="input-container">
+            <textarea name="method-desc-{{i}}" rows="8" cols="60" class="text-input area" placeholder="説明文" [value]="methods[i].description" [(ngModel)]="methods[i].description"></textarea>
+          </div>
+        </li>
+
+      </div>
+    </div>
+    <div class="add-button-container">
+      <div class="add-button cr-flex-center" (click)="addMethod()">
+        <div class="plus">+</div>
+        <div class="label"></div>追加
+      </div>
+    </div>
+
+
+    <!--<input type="submit" name="" value="送信" class="send">-->
+    <div class="send-button cr-flex-center" (click)="send()">送信</div>
+  </form>
+</div>
+
+
+<cg-circuit-generator *ngIf="showDialog" (imageSaved)="saved($event)"></cg-circuit-generator>
+
+
+
